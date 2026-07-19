@@ -1,0 +1,178 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-black: #0a0a0a;
+  --color-red: #dc2626;
+  --color-yellow: #f59e0b;
+  --color-gray-metal: #1f2937;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  scroll-behavior: smooth;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #0a0a0a;
+  color: #ffffff;
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #1f2937;
+}
+::-webkit-scrollbar-thumb {
+  background: #dc2626;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #b91c1c;
+}
+
+/* Selection color */
+::selection {
+  background-color: #dc2626;
+  color: white;
+}
+
+/* Smooth scroll for anchor links */
+html {
+  scroll-padding-top: 80px;
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg hover:shadow-red-600/30;
+  }
+
+  .btn-secondary {
+    @apply bg-yellow-500 hover:bg-yellow-400 text-black font-bold py-3 px-6 rounded-lg transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg hover:shadow-yellow-500/30;
+  }
+
+  .btn-outline {
+    @apply border-2 border-white/30 hover:border-white text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 hover:bg-white/10;
+  }
+
+  .section-title {
+    @apply text-3xl md:text-4xl lg:text-5xl font-black text-white leading-tight;
+  }
+
+  .section-subtitle {
+    @apply text-gray-400 text-lg mt-4 max-w-2xl mx-auto;
+  }
+
+  .card-dark {
+    @apply bg-gray-900 border border-gray-800 rounded-2xl p-6 hover:border-red-600/50 transition-all duration-300 hover:shadow-xl hover:shadow-red-600/10;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-red-500 to-yellow-500 bg-clip-text text-transparent;
+  }
+
+  .section-padding {
+    @apply py-16 md:py-24;
+  }
+
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}
+
+/* Animated underline for nav links */
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #dc2626;
+  transition: width 0.3s ease;
+}
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+/* Hero gradient overlay */
+.hero-overlay {
+  background: linear-gradient(
+    135deg,
+    rgba(10, 10, 10, 0.95) 0%,
+    rgba(31, 41, 55, 0.85) 50%,
+    rgba(10, 10, 10, 0.9) 100%
+  );
+}
+
+/* Glow effects */
+.glow-red {
+  box-shadow: 0 0 30px rgba(220, 38, 38, 0.3);
+}
+.glow-yellow {
+  box-shadow: 0 0 30px rgba(245, 158, 11, 0.3);
+}
+
+/* Stripe pattern for emergency sections */
+.stripe-pattern {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 10px,
+    rgba(220, 38, 38, 0.05) 10px,
+    rgba(220, 38, 38, 0.05) 20px
+  );
+}
+
+/* Number counter animation */
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Floating animation */
+@keyframes floatUp {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.animate-float {
+  animation: floatUp 3s ease-in-out infinite;
+}
+
+/* Pulse ring for emergency button */
+@keyframes pulseRing {
+  0% { transform: scale(0.8); opacity: 1; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+.pulse-ring::before,
+.pulse-ring::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(220, 38, 38, 0.4);
+  animation: pulseRing 2s ease-out infinite;
+}
+.pulse-ring::after {
+  animation-delay: 1s;
+}
