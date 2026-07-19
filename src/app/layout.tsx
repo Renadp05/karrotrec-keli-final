@@ -1,5 +1,4 @@
-import type { Metadata } from "next";
-import Script from "next/script";
+﻿import type { Metadata } from "next";
 import "./globals.css";
 
 import Header from "@/components/Header";
@@ -78,10 +77,6 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-
-  verification: {
-    google: "",
-  },
 };
 
 export default function RootLayout({
@@ -127,7 +122,29 @@ export default function RootLayout({
   return (
     <html lang="sq">
       <head>
+        {/* Google Ads Tag */}
+        <script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ADS_ID}`}
+        />
+
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+
+              function gtag() {
+                dataLayer.push(arguments);
+              }
+
+              gtag('js', new Date());
+              gtag('config', '${GOOGLE_ADS_ID}');
+            `,
+          }}
+        />
+
         <link rel="preconnect" href="https://fonts.googleapis.com" />
+
         <link
           rel="preconnect"
           href="https://fonts.gstatic.com"
@@ -150,29 +167,8 @@ export default function RootLayout({
       </head>
 
       <body className="bg-black text-white antialiased">
-        {/* Google Ads base tag */}
-        <Script
-          src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ADS_ID}`}
-          strategy="afterInteractive"
-        />
-
-        <Script id="google-ads-tag" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-
-            function gtag() {
-              window.dataLayer.push(arguments);
-            }
-
-            gtag('js', new Date());
-            gtag('config', '${GOOGLE_ADS_ID}');
-          `}
-        </Script>
-
         <Header />
-
         <main>{children}</main>
-
         <Footer />
         <FloatingButtons />
       </body>
